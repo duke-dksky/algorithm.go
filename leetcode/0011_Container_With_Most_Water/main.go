@@ -32,7 +32,7 @@ func maxArea(height []int) int {
 		}
 	}
 
-	return 0
+	return result
 }
 
 func main() {
