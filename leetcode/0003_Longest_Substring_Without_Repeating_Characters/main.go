@@ -9,6 +9,31 @@ func maxNum(a, b int) int {
 	return b
 }
 
+func lengthOfLongestSubstring1(s string) int {
+	if len(s) == 0 {
+		return 0
+	}
+
+	maxL := 0
+
+	mp := [128]int{}
+	for i, _ := range mp {
+		mp[i] = -1
+	}
+
+	lowIndex := 0
+	for i, c := range s {
+		if lowIndex <= mp[c] {
+			lowIndex = mp[c] + 1
+		} else {
+			maxL = maxNum(maxL, i-lowIndex+1)
+		}
+		mp[c] = i
+	}
+
+	return maxL
+}
+
 func lengthOfLongestSubstring(s string) int {
 	if len(s) == 0 {
 		return 0
@@ -37,10 +62,10 @@ func main() {
 	s4 := "au"
 	s5 := "dvdf"
 	s6 := "tmmzuxt"
-	fmt.Println(lengthOfLongestSubstring(s1))
-	fmt.Println(lengthOfLongestSubstring(s2))
-	fmt.Println(lengthOfLongestSubstring(s3))
-	fmt.Println(lengthOfLongestSubstring(s4))
-	fmt.Println(lengthOfLongestSubstring(s5))
-	fmt.Println(lengthOfLongestSubstring(s6))
+	fmt.Println(lengthOfLongestSubstring1(s1))
+	fmt.Println(lengthOfLongestSubstring1(s2))
+	fmt.Println(lengthOfLongestSubstring1(s3))
+	fmt.Println(lengthOfLongestSubstring1(s4))
+	fmt.Println(lengthOfLongestSubstring1(s5))
+	fmt.Println(lengthOfLongestSubstring1(s6))
 }
