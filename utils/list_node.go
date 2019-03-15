@@ -13,20 +13,18 @@ func NewListNode(data Object) *ListNode {
 	return &ListNode{data, nil}
 }
 
-// head必须为指针的指针,因为链表为空时,需要改变头指针
-func AddValueToListNode(head *ListNode, value Object) {
+/* head必须为指针的指针,因为链表为空时,需要改变头指针 */
+func AddValueToListNode(head **ListNode, value Object) {
 	newListNode := NewListNode(value)
-
-	if head == nil {
-		head = newListNode
+	if *head == nil {
+		*head = newListNode
 	} else {
-		newHead := head
+		newHead := *head
 		for newHead.Next != nil {
 			newHead = newHead.Next
 		}
 		newHead.Next = newListNode
 	}
-
 	return
 }
 
