@@ -37,8 +37,10 @@ func main() {
 	nums2 := []int{4, 5, 0, 1, 2, 3}
 	nums3 := []int{2, 1}
 	nums4 := []int{4, 5, 6, 7, 0, 1, 2}
+	nums5 := []int{2, 2, 2, 0, 0, 0, 0}
 	fmt.Println(findMin(nums1))
 	fmt.Println(findMin(nums2))
 	fmt.Println(findMin(nums3))
 	fmt.Println(findMin(nums4))
+	fmt.Println(findMin(nums5))
 }
