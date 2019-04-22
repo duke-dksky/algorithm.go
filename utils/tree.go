@@ -122,7 +122,7 @@ func LevelOrder(t *Tree) {
 		return
 	}
 
-	queue := make([]*Tree, 1)
+	queue := make([]*Tree, 0)
 	queue = append(queue, t)
 
 	for len(queue) != 0 {
