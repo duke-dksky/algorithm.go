@@ -49,13 +49,9 @@ func RemoveNode(head **ListNode, value int) {
 
 // print list node
 func PrintListNode(head *ListNode) {
-	if head == nil {
-		return
-	}
-	newHead := head
-	for newHead != nil {
-		fmt.Printf("list node data: %v\n", newHead.Data)
-		newHead = newHead.Next
+	for head != nil {
+		fmt.Printf("list node data: %v\n", head.Data)
+		head = head.Next
 	}
 	return
 }
