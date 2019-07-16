@@ -2,54 +2,53 @@ package main
 
 import "fmt"
 
-func MergeSort(n []int) {
+func QuickSort(n []int) {
 	if n == nil || len(n) <= 1 {
 		return
 	}
-	mergeSort(n, 0, len(n)-1)
+	quickSort(n, 0, len(n)-1)
 }
 
-func mergeSort(n []int, begin, end int) {
+func quickSort(n []int, begin, end int) {
 	if begin >= end {
 		return
 	}
-	mid := begin + (end-begin)/2
-	mergeSort(n, begin, mid)
-	mergeSort(n, mid+1, end)
-	merge(n, begin, mid, end)
+	idx := partition_2(n, begin, end)
+	quickSort(n, begin, idx-1)
+	quickSort(n, idx+1, end)
 }
 
-func merge(n []int, begin, mid, end int) {
-	tmp := make([]int, end-begin+1)
+// 类似选择排序,分为`排序区`和`非排序区`
+func partition(n []int, begin, end int) int {
+	pivot := n[end]
+	tmp := begin
 	for i := begin; i <= end; i++ {
-		tmp[i-begin] = n[i]
-	}
-
-	left, right := begin, mid+1
-
-	for i := begin; i <= end; i++ {
-		if left <= mid && right <= end {
-			if tmp[left-begin] < tmp[right-begin] {
-				n[i] = tmp[left-begin]
-				left++
-			} else {
-				n[i] = tmp[right-begin]
-				right++
-			}
-		} else if left <= mid {
-			n[i] = tmp[left-begin]
-			left++
-		} else {
-			n[i] = tmp[right-begin]
-			right++
+		if n[i] <= pivot {
+			n[tmp], n[i] = n[i], n[tmp]
+			tmp++
 		}
 	}
+	return tmp - 1
+}
 
+func partition_2(n []int, begin, end int) int {
+	pivot := n[begin]
+	for begin < end {
+		for begin < end && n[end] >= pivot {
+			end--
+		}
+		n[begin] = n[end]
+		for begin < end && n[begin] <= pivot {
+			begin++
+		}
+		n[end] = n[begin]
+	}
+	n[begin] = pivot
+	return begin
 }
 
 func main() {
-
-	n := []int{4, 5, 6, 1, 2, 3}
-	MergeSort(n)
+	n := []int{6, 5, 4, 1, 2, 3}
+	QuickSort(n)
 	fmt.Println(n)
 }
