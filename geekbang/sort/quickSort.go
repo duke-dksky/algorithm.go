@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func QuickSort(n []int) {
 	if n == nil || len(n) <= 1 {
 		return
@@ -45,10 +43,4 @@ func partition_2(n []int, begin, end int) int {
 	}
 	n[begin] = pivot
 	return begin
-}
-
-func main() {
-	n := []int{6, 5, 4, 1, 2, 3}
-	QuickSort(n)
-	fmt.Println(n)
 }
