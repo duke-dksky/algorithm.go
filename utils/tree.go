@@ -26,6 +26,19 @@ func InsertNodeToTree(t *Tree, v int) *Tree {
 	return t
 }
 
+func FindNodeInTree(t *Tree, v int) bool {
+	if t == nil {
+		return false
+	}
+	if t.Data == v {
+		return true
+	} else if t.Data > v {
+		return FindNodeInTree(t.Left, v)
+	} else {
+		return FindNodeInTree(t.Left, v)
+	}
+}
+
 // reference: https://blog.csdn.net/monster_ii/article/details/82115772
 
 // PreOrder
