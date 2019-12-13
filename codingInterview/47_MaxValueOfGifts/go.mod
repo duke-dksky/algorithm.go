@@ -1,0 +1,1 @@
+module max_value_of_gifts

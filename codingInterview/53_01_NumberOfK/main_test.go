@@ -15,6 +15,21 @@ func TestGetNumberOfK(t *testing.T) {
 			giveK:    3,
 			want:     4,
 		},
+		{
+			giveData: []int{1, 2, 4, 5},
+			giveK:    6,
+			want:     0,
+		},
+		{
+			giveData: []int{1},
+			giveK:    1,
+			want:     1,
+		},
+		{
+			giveData: []int{},
+			giveK:    1,
+			want:     0,
+		},
 	}
 
 	for _, tt := range tests {
