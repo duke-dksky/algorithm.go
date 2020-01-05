@@ -50,3 +50,13 @@ func PrintList(head *ListNode) {
 		head = head.Next
 	}
 }
+
+func PrintListReversingly(head *ListNode) {
+	if head == nil {
+		return
+	}
+	if head.Next != nil {
+		PrintListReversingly(head.Next)
+	}
+	fmt.Println(head.Value)
+}
