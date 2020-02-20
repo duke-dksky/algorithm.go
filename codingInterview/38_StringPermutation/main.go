@@ -2,24 +2,58 @@ package main
 
 import "fmt"
 
-func Permutation(s string) {
-	if len(s) == 0 {
-		return
+func spiralOrder(matrix [][]int) []int {
+	if len(matrix) == 0 {
+		return nil
 	}
-	PermutationRecursive([]byte(s), 0)
+
+	rows, cols := len(matrix), len(matrix[0])
+	var startX, startY int
+	res := make([]int, 0)
+
+	for startX <= rows-1/2 && startY <= cols-1/2 {
+		tmp := spiralOrderCore(matrix, startX, startY)
+		res = append(res, tmp...)
+		startX++
+		startY++
+	}
+
+	return res
 }
 
-func PermutationRecursive(b []byte, begin int) {
-	if len(b) == begin {
-		fmt.Println(string(b))
+func spiralOrderCore(matrix [][]int, startX, startY int) []int {
+	if len(matrix) == 0 {
+		return nil
 	}
-	for i := begin; i < len(b); i++ {
-		b[i], b[begin] = b[begin], b[i]
-		PermutationRecursive(b, begin+1)
-		b[begin], b[i] = b[i], b[begin]
+	rows, cols := len(matrix), len(matrix[0])
+	endX, endY := rows-1-startX, cols-1-startY
+
+	res := make([]int, 0)
+
+	for i := startY; i <= endY; i++ {
+		res = append(res, matrix[startX][i])
 	}
+
+	if startX < endX {
+		for i := startX + 1; i <= endX; i++ {
+			res = append(res, matrix[i][endY])
+		}
+	}
+
+	if startX < endX && startY < endY {
+		for i := endY - 1; i >= startY; i-- {
+			res = append(res, matrix[endX][i])
+		}
+	}
+
+	if startY < endY && startX < endY {
+		for i := endX - 1; i >= startX+1; i-- {
+			res = append(res, matrix[i][startY])
+		}
+	}
+	return res
 }
 
 func main() {
-	Permutation("abc")
+	fmt.Println(spiralOrder([][]int{{5, 6, 7}}))
 }
