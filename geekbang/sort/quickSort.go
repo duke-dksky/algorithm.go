@@ -1,7 +1,7 @@
 package main
 
 func QuickSort(n []int) {
-	if n == nil || len(n) <= 1 {
+	if len(n) <= 1 {
 		return
 	}
 	quickSort(n, 0, len(n)-1)

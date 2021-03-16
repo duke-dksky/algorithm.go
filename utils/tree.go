@@ -20,9 +20,9 @@ func InsertNodeToTree(t *Tree, v int) *Tree {
 	}
 	if v < t.Data {
 		t.Left = InsertNodeToTree(t.Left, v)
-		return t
+	} else {
+		t.Right = InsertNodeToTree(t.Right, v)
 	}
-	t.Right = InsertNodeToTree(t.Right, v)
 	return t
 }
 
@@ -35,7 +35,7 @@ func FindNodeInTree(t *Tree, v int) bool {
 	} else if t.Data > v {
 		return FindNodeInTree(t.Left, v)
 	} else {
-		return FindNodeInTree(t.Left, v)
+		return FindNodeInTree(t.Right, v)
 	}
 }
 
@@ -54,17 +54,15 @@ func PreOrder(t *Tree) {
 // 栈中元素都是自己和自己的左孩子都访问过了，而右孩子还没有访问到的节点
 func PreOrderNonRecursive(t *Tree) {
 	stack := make([]*Tree, 0)
-	cur := t
-
-	for cur != nil || len(stack) != 0 {
-		for cur != nil {
+	for t != nil || len(stack) != 0 {
+		for t != nil {
 			fmt.Printf("%d ", t.Data)
-			stack = append(stack, cur)
-			cur = cur.Left
+			stack = append(stack, t)
+			t = t.Left
 		}
 		top := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
-		cur = top.Right
+		t = top.Right
 	}
 }
 

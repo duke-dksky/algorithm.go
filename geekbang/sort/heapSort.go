@@ -31,10 +31,10 @@ func minHeapAdjust(heap []int, i int, n int) {
 }
 
 func heapSort(heap []int) {
-	if heap == nil || len(heap) == 1 {
+	n := len(heap)
+	if n < 2 {
 		return
 	}
-	n := len(heap)
 	// 建堆
 	for i := n/2 - 1; i >= 0; i-- {
 		minHeapAdjust(heap, i, n)

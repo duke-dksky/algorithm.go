@@ -122,11 +122,22 @@ func middleNode(head *ListNode) *ListNode {
 	return slow
 }
 
+func copyList(head *ListNode) *ListNode {
+	cur := head
+	for cur != nil {
+		newNode := &ListNode{Data: cur.Data, Next: cur.Next}
+		cur.Next = newNode
+		cur = cur.Next.Next
+	}
+	return head
+}
+
 func main() {
 	var head *ListNode = nil
 	head = AddValueToList(head, 1)
 	head = AddValueToList(head, 2)
-	PrintList(head)
-	head = ReverseList(head)
+	head = AddValueToList(head, 3)
+	head = AddValueToList(head, 4)
+	head = copyList(head)
 	PrintList(head)
 }
