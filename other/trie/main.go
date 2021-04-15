@@ -41,10 +41,39 @@ func (t *Trie) StartWith(prefix string) bool {
 	return true
 }
 
+type IntTrie struct {
+	next [2]*IntTrie
+}
+
+func NewIntTrie() *IntTrie {
+	return &IntTrie{}
+}
+
+func (t *IntTrie) Insert(x int) {
+	for i := 63; i >= 0; i-- {
+		p := (x >> i) & 0x01
+		if t.next[p] == nil {
+			t.next[p] = new(IntTrie)
+		}
+		t = t.next[p]
+	}
+}
+
+// trie树的应用场景都需要改写search的功能
+func (t *IntTrie) Search(x int) bool {
+	for i := 63; i >= 0; i-- {
+		p := (x >> i) & 0x01
+		if t.next[p] == nil {
+			return false
+		}
+		t = t.next[p]
+	}
+	return true
+}
+
 func main() {
 	obj := NewTrie()
-	obj.Insert("duke")
-	fmt.Println(obj.Search("duke"))
-	fmt.Println(obj.Search("dukk"))
-	fmt.Println(obj.StartWith("du"))
+	fmt.Println(obj.next)
+	obj.Insert("a")
+	fmt.Println(obj.next)
 }
