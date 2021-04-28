@@ -43,5 +43,16 @@ func (pq *PriorityQueue) push(x *Item) {
 }
 
 func main() {
-	fmt.Println("vim-go")
+	pq := make(PriorityQueue, 0)
+	heap.Init(&pq)
+	pq.push(&Item{
+		val:      2,
+		priority: 2,
+	})
+	pq.push(&Item{
+		val:      1,
+		priority: 1,
+	})
+	fmt.Println(pq.pop().val)
+	fmt.Println(pq.pop().val)
 }
