@@ -95,8 +95,41 @@ func (t *treap) lowerBound(val int) (lb *node) {
 	return
 }
 
+func (t *treap) upperBound(val int) (ub *node) {
+	for o := t.root; o != nil; {
+		switch c := o.cmp(val); {
+		case c == 0:
+			o = o.ch[0]
+		case c == 1:
+			ub = o
+			o = o.ch[1]
+		case c == -1:
+			return o
+		}
+	}
+	return
+}
+
 func (t *treap) size() int {
 	return t.cnt
+}
+
+func (t *treap) begin() int {
+	ans := 0
+	for o := t.root; o != nil; {
+		ans = o.val
+		o = o.ch[0]
+	}
+	return ans
+}
+
+func (t *treap) end() int {
+	ans := 0
+	for o := t.root; o != nil; {
+		ans = o.val
+		o = o.ch[1]
+	}
+	return ans
 }
 
 func main() {

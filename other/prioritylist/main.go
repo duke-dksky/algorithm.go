@@ -42,6 +42,10 @@ func (pq *PriorityQueue) push(x *Item) {
 	heap.Push(pq, x)
 }
 
+func (pq *PriorityQueue) top() *Item {
+	return (*pq)[0]
+}
+
 func main() {
 	pq := make(PriorityQueue, 0)
 	heap.Init(&pq)
